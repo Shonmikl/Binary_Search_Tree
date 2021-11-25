@@ -94,65 +94,34 @@ public class Node {
         if (isNodeExist(node.left)) {
             count += 1;
         }
-        if(isNodeExist(node.right)) {
+        if (isNodeExist(node.right)) {
             count += 1;
         }
         return count;
     }
 
-    Node getChildOrNull (Node node) {
+    Node getChildOrNull(Node node) {
         return isNodeExist(node.left) ? node.left : node.right;
     }
 
-    void removeNodeWithOneOrZeroChild ( Node nodeToDelete) {
+    void removeNodeWithOneOrZeroChild(Node nodeToDelete) {
         Node childOrNull = getChildOrNull(nodeToDelete);
         moveNode(nodeToDelete, childOrNull);
     }
 
-    boolean remove (Node root, int value) {
+    boolean remove(Node root, int value) {
         Node nodeToDelete = search(root, value);
-        if(!isNodeExist(nodeToDelete)) {
+        if (!isNodeExist(nodeToDelete)) {
             return false;
         }
         int childrenCount = getChildrenCount(nodeToDelete);
-        if(childrenCount < 2) {
+        if (childrenCount < 2) {
             removeNodeWithOneOrZeroChild(nodeToDelete);
         } else {
             Node minNode = getMin(nodeToDelete.right);
             nodeToDelete.value = minNode.value;
             removeNodeWithOneOrZeroChild(minNode);
         }
-        return  true;
+        return true;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
