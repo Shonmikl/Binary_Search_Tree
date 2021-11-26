@@ -2,11 +2,12 @@ public class Node {
     public Node left;   // left child
     public Node right;  // right child
     public Integer value;  // value
-//  9  2  5  13  6  10  14  7  33  2  3  //
+
+    //  9  2  5  13  6  10  14  7  33  2  3  //
     public static void main(String[] args) {
         Integer[] digit = {9, 2, 5, 13, 6, 10, 14, 7, 33, 44, 3};
         Node node = new Node();
-        createNode(node, 9 );
+        createNode(node, 9);
         for (int i = 1; i < digit.length; i++) {
             insert(node, digit[i]);
         }
@@ -68,6 +69,7 @@ public class Node {
         }
         return getMax(node.right);
     }
+
     //to sorting
     private static void inOrderTraversal(Node node) {
         if (!isNodeExist(node)) {
@@ -77,6 +79,7 @@ public class Node {
         System.out.print("[ " + node.value + " ]");
         inOrderTraversal(node.right);
     }
+
     //to delete
     private static void postOrderTraversal(Node node) {
         if (!isNodeExist(node)) {
@@ -86,6 +89,7 @@ public class Node {
         postOrderTraversal(node.right);
         System.out.print(node.value);
     }
+
     //to copy a tree
     private static void directOrderTraversal(Node node) {
         if (!isNodeExist(node)) {
