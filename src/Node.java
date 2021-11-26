@@ -2,18 +2,31 @@ public class Node {
     public Node left;   // left child
     public Node right;  // right child
     public Integer value;  // value
+//  9  2  5  13  6  10  14  7  33  2  3  //
+    public static void main(String[] args) {
+        Integer[] digit = {9, 2, 5, 13, 6, 10, 14, 7, 33, 44, 3};
+        Node node = new Node();
+        createNode(node, 9 );
+        for (int i = 1; i < digit.length; i++) {
+            insert(node, digit[i]);
+        }
+        inOrderTraversal(node);
+        remove(node, 10);
+        System.out.println();
+        inOrderTraversal(node);
+    }
 
-    boolean isNodeExist(Node node) {
+    private static boolean isNodeExist(Node node) {
         return node != null && node.value != null;
     }
 
-    void createNode(Node node, int value) {
+    private static void createNode(Node node, int value) {
         node.left = new Node();
         node.right = new Node();
         node.value = value;
     }
 
-    void insert(Node node, int value) {
+    private static void insert(Node node, int value) {
         if (!isNodeExist(node)) {
             createNode(node, value);
         } else if (value < node.value) {
@@ -23,7 +36,7 @@ public class Node {
         }
     }
 
-    Node search(Node node, int value) {
+    private static Node search(Node node, int value) {
         if (!isNodeExist(node)) {
             return null;
         }
@@ -36,7 +49,7 @@ public class Node {
         return search(node.right, value);
     }
 
-    Node getMin(Node node) {
+    private static Node getMin(Node node) {
         if (!isNodeExist(node)) {
             return null;
         }
@@ -46,7 +59,7 @@ public class Node {
         return getMin(node.left);
     }
 
-    Node getMax(Node node) {
+    private static Node getMax(Node node) {
         if (!isNodeExist(node)) {
             return null;
         }
@@ -55,17 +68,17 @@ public class Node {
         }
         return getMax(node.right);
     }
-
-    void inOrderTraversal(Node node) {
+    //to sorting
+    private static void inOrderTraversal(Node node) {
         if (!isNodeExist(node)) {
             return;
         }
         inOrderTraversal(node.left);
-        System.out.print(node.value);
+        System.out.print("[ " + node.value + " ]");
         inOrderTraversal(node.right);
     }
-
-    void postOrderTraversal(Node node) {
+    //to delete
+    private static void postOrderTraversal(Node node) {
         if (!isNodeExist(node)) {
             return;
         }
@@ -73,8 +86,8 @@ public class Node {
         postOrderTraversal(node.right);
         System.out.print(node.value);
     }
-
-    void directOrderTraversal(Node node) {
+    //to copy a tree
+    private static void directOrderTraversal(Node node) {
         if (!isNodeExist(node)) {
             return;
         }
@@ -83,13 +96,13 @@ public class Node {
         directOrderTraversal(node.right);
     }
 
-    void moveNode(Node toNode, Node fromNode) {
+    private static void moveNode(Node toNode, Node fromNode) {
         toNode.value = fromNode.value;
         toNode.left = fromNode.left;
         toNode.right = fromNode.right;
     }
 
-    int getChildrenCount(Node node) {
+    private static int getChildrenCount(Node node) {
         int count = 0;
         if (isNodeExist(node.left)) {
             count += 1;
@@ -100,16 +113,16 @@ public class Node {
         return count;
     }
 
-    Node getChildOrNull(Node node) {
+    private static Node getChildOrNull(Node node) {
         return isNodeExist(node.left) ? node.left : node.right;
     }
 
-    void removeNodeWithOneOrZeroChild(Node nodeToDelete) {
+    private static void removeNodeWithOneOrZeroChild(Node nodeToDelete) {
         Node childOrNull = getChildOrNull(nodeToDelete);
         moveNode(nodeToDelete, childOrNull);
     }
 
-    boolean remove(Node root, int value) {
+    private static boolean remove(Node root, int value) {
         Node nodeToDelete = search(root, value);
         if (!isNodeExist(nodeToDelete)) {
             return false;
